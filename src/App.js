@@ -8,6 +8,7 @@ import Textfield from './Components/FormsUI/Textfield';
 import Select from './Components/FormsUI/Select';
 import countries from './data/countries.json';
 import DateTimePicker from './Components/FormsUI/DateTimePicker';
+import Checkbox from './Components/FormsUI/Checkbox';
 
 const useStyles = makeStyles((theme) => ({
   formWrapper: {
@@ -28,6 +29,7 @@ const INITIAL_FORM_STATE = {
   arrivealDate: '',
   departureDate: '',
   message: '',
+  termsOfService: false,
 };
 
 const FORM_VALIDATION = Yup.object().shape({
@@ -46,6 +48,9 @@ const FORM_VALIDATION = Yup.object().shape({
   arrivealDate: Yup.date().required('Required'),
   departureDate: Yup.date().required('Required'),
   message: Yup.string(),
+  termsOfService: Yup.boolean()
+    .oneOf([true], 'The terms must be accepted')
+    .required('The terms must be accepted'),
 });
 
 const App = () => {
@@ -118,6 +123,13 @@ const App = () => {
                     label='Message'
                     multiline={true}
                     rows={4}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Checkbox
+                    name='termsOfService'
+                    legend='terms of Service'
+                    label='I agree'
                   />
                 </Grid>
               </Grid>
