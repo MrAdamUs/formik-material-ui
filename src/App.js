@@ -7,6 +7,7 @@ import { Container, Grid, Typography } from '@material-ui/core';
 import Textfield from './Components/FormsUI/Textfield';
 import Select from './Components/FormsUI/Select';
 import countries from './data/countries.json';
+import DateTimePicker from './Components/FormsUI/DateTimePicker';
 
 const useStyles = makeStyles((theme) => ({
   formWrapper: {
@@ -24,6 +25,9 @@ const INITIAL_FORM_STATE = {
   city: '',
   state: '',
   country: '',
+  arrivealDate: '',
+  departureDate: '',
+  message: '',
 };
 
 const FORM_VALIDATION = Yup.object().shape({
@@ -39,6 +43,9 @@ const FORM_VALIDATION = Yup.object().shape({
   city: Yup.string().required('Required'),
   state: Yup.string().required('Required'),
   country: Yup.string().required('Required'),
+  arrivealDate: Yup.date().required('Required'),
+  departureDate: Yup.date().required('Required'),
+  message: Yup.string(),
 });
 
 const App = () => {
@@ -98,6 +105,20 @@ const App = () => {
 
                 <Grid item xs={12}>
                   <Typography>Booking information</Typography>
+                </Grid>
+                <Grid item xs={6}>
+                  <DateTimePicker name='arrivealDate' label='arrival Date' />
+                </Grid>
+                <Grid item xs={6}>
+                  <DateTimePicker name='departureDate' label='arrival Date' />
+                </Grid>
+                <Grid item xs={12}>
+                  <Textfield
+                    name='message'
+                    label='Message'
+                    multiline={true}
+                    rows={4}
+                  />
                 </Grid>
               </Grid>
             </Form>
