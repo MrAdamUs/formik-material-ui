@@ -1,35 +1,38 @@
 import React from 'react';
 import {
   Checkbox,
-  FormControlLabel,
   FormControl,
+  FormControlLabel,
   FormGroup,
   FormLabel,
 } from '@material-ui/core';
 import { useField, useFormikContext } from 'formik';
+
 const CheckboxWrapper = ({ name, label, legend, ...otherProps }) => {
   const { setFieldValue } = useFormikContext();
-  const [filed, meta] = useField(name);
+  const [field, meta] = useField(name);
 
-  const handleChange = (e) => {
-    const { checked } = e.target;
+  const handleChange = (evt) => {
+    const { checked } = evt.target;
     setFieldValue(name, checked);
   };
-  const configCheckBox = {
-    ...filed,
+
+  const configCheckbox = {
+    ...field,
     onChange: handleChange,
   };
-  const configFormControl = {};
 
+  const configFormControl = {};
   if (meta && meta.touched && meta.error) {
     configFormControl.error = true;
   }
+
   return (
-    <FormControl>
-      <FormLabel components='legend'>{legend}</FormLabel>
+    <FormControl {...configFormControl}>
+      <FormLabel component='legend'>{legend}</FormLabel>
       <FormGroup>
         <FormControlLabel
-          control={<Checkbox {...configCheckBox} />}
+          control={<Checkbox {...configCheckbox} />}
           label={label}
         />
       </FormGroup>
